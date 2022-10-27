@@ -1,0 +1,9 @@
+-:
+HudControl
+    Author:
+        Museus (Discord: Museus#7777)
+
+    Optionally toggle parts of the Hades HUD
+:-
+
+Import "HudControl.lua"
