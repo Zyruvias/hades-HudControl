@@ -15,13 +15,11 @@ To install HudControl, go to the [Releases](https://github.com/Museus/HudControl
 
 If you prefer text instructions, follow these steps:
 
-If you don't already have Python installed, download it from [python.org](https://www.python.org/downloads/) and install it.
-
 Once you have downloaded the `HudControl.zip` file, open up your Hades game directory. You can find this by launching Hades, then opening Task Manager, finding the Hades process, right-clicking on it, and selecting Open File Location.
 
-Unzip the files into the `.../Hades/Content` folder. You should now have the standard folders such as `Scripts` and `Game` as well as a new folder called `Mods` and the `modimporter.py` script.
+Unzip the files into the `.../Hades/Content` folder. You should now have the standard folders such as `Scripts` and `Game` as well as a new folder called `Mods` and the `modimporter.exe` script.
 
-Run the `modimporter.py` script to install the mods, then load into your game. Whenever you want to uninstall the mods, simply delete the contents of the `Mods` folder, and run the `modimporter.py` script again.
+Run the `modimporter.exe` script to install the mods, then load into your game. Whenever you want to uninstall the mods, simply delete the contents of the `Mods` folder, and run the `modimporter.exe` script again.
 
 # Configuration
 
