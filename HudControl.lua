@@ -9,18 +9,45 @@ ModUtil.RegisterMod("HudControl")
 
 local config = {
     Enabled = true,
+
+    -- Enemies
     RemoveEnemyHealthBars = true,
+
+    -- Zagreus
     RemoveZagreusHealthBars = true,
     RemoveZagreusCallMeter = true,
     RemoveZagreusRailAmmo = true,
     RemoveZagreusCasts = true,
-    -- RemoveZagreusDeathDefiances = true,
-    RemoveObols = true,
     RemoveSideBar = true,
-    RemoveHeat = true,
+
+    -- Resources
+    RemoveObols = true,
+    RemoveNectar = true,
+    RemoveDarkness = true,
+    RemoveGems = true,
+    RemoveKeys = true,
+    RemoveTitansBlood = true,
+    RemoveDiamonds = true,
+    RemoveAmbrosia = true,
     RemoveRerolls = true,
+
+    -- Information
+    RemoveHeat = true,
 }
 HudControl.config = config
+
+-- Define mapping of Resource names to config options
+-- for use with the ShowResourceUI function wrapper
+HudControl.ResourceConfigMap = {
+    GiftPoints = "RemoveNectar",
+    MetaPoints = "RemoveDarkness",
+    Gems = "RemoveGems",
+    LockKeys = "RemoveKeys",
+    SuperLockKeys = "RemoveTitansBlood",
+    SuperGems = "RemoveDiamonds",
+    SuperGiftPoints = "RemoveAmbrosia"
+}
+
 
 -- Enemy Health Bars
 -- Scripts/CombatPresentation.lua : 65
@@ -114,3 +141,14 @@ ModUtil.WrapBaseFunction("ShowRerollUI", function ( baseFunc, offsetY )
     baseFunc( offsetY )
 end, HudControl)
 
+-- Resources
+-- Scripts/UIScripts.lua : 585
+ModUtil.WrapBaseFunction("ShowResourceUI", function ( baseFunc, resourceName, offsetY, args )
+    local resourceConfigOption = HudControl.ResourceConfigMap[resourceName]
+    local shouldRemoveResource = HudControl.config[resourceConfigOption]
+    if HudControl.config.Enabled and shouldRemoveResource then
+        return
+    end
+
+    baseFunc( resourceName, offsetY, args )
+end, HudControl)
