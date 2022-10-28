@@ -7,7 +7,7 @@
 ]]
 ModUtil.RegisterMod("HudControl")
 
-local config = {
+HudControl.config = {
     Enabled = true,
 
     -- Enemies
@@ -34,7 +34,6 @@ local config = {
     -- Information
     RemoveHeat = true,
 }
-HudControl.config = config
 
 -- Define mapping of Resource names to config options
 -- for use with the ShowResourceUI function wrapper
@@ -52,7 +51,7 @@ HudControl.ResourceConfigMap = {
 -- Enemy Health Bars
 -- Scripts/CombatPresentation.lua : 65
 ModUtil.WrapBaseFunction("CreateHealthBar", function ( baseFunc, newEnemy )
-    if config.Enabled and config.RemoveEnemyHealthBars then
+    if HudControl.config.Enabled and HudControl.config.RemoveEnemyHealthBars then
         return
     end
     baseFunc( newEnemy )
@@ -61,7 +60,7 @@ end, HudControl)
 -- Zagreus Health Bar
 -- Scripts/UIScripts.lua : 434
 ModUtil.WrapBaseFunction("ShowHealthUI", function ( baseFunc )
-    if config.Enabled and config.RemoveZagreusHealthBars then
+    if HudControl.config.Enabled and HudControl.config.RemoveZagreusHealthBars then
         return
     end
 
@@ -71,7 +70,7 @@ end, HudControl)
 -- Zagreus Casts
 -- Scripts/UIScripts.lua : 908
 ModUtil.WrapBaseFunction("ShowAmmoUI", function ( baseFunc )
-    if config.Enabled and config.RemoveZagreusCasts then
+    if HudControl.config.Enabled and HudControl.config.RemoveZagreusCasts then
         return
     end
 
@@ -81,7 +80,7 @@ end, HudControl)
 -- Zagreus Rail Ammo
 -- Scripts/UIScripts.lua : 966
 ModUtil.WrapBaseFunction("ShowGunUI", function ( baseFunc, gunData )
-    if config.Enabled and config.RemoveZagreusRailAmmo then
+    if HudControl.config.Enabled and HudControl.config.RemoveZagreusRailAmmo then
         return
     end
 
@@ -91,7 +90,7 @@ end, HudControl)
 -- Zagreus Call
 -- Scripts/UIScripts.lua : 1061
 ModUtil.WrapBaseFunction("ShowSuperMeter", function ( baseFunc )
-    if config.Enabled and config.RemoveZagreusCallMeter then
+    if HudControl.config.Enabled and HudControl.config.RemoveZagreusCallMeter then
         return
     end
 
@@ -101,7 +100,7 @@ end, HudControl)
 -- Obols
 -- Scripts/UIScripts.lua : 739
 ModUtil.WrapBaseFunction("ShowMoneyUI", function ( baseFunc, offsetY )
-    if config.Enabled and config.RemoveObols then
+    if HudControl.config.Enabled and HudControl.config.RemoveObols then
         return
     end
 
@@ -111,7 +110,7 @@ end, HudControl)
 -- Boons/Keepsake Sidebar
 -- Scripts/UIScripts.lua : 1265
 ModUtil.WrapBaseFunction("ShowTraitUI", function ( baseFunc )
-    if config.Enabled and config.RemoveSideBar then
+    if HudControl.config.Enabled and HudControl.config.RemoveSideBar then
         return
     end
 
@@ -121,7 +120,7 @@ end, HudControl)
 -- Active Heat
 -- Scripts/UIScripts.lua : 2901
 ModUtil.WrapBaseFunction("UpdateActiveShrinePoints", function ( baseFunc )
-    if config.Enabled and config.RemoveHeat then
+    if HudControl.config.Enabled and HudControl.config.RemoveHeat then
         if ScreenAnchors.ShrinePointIconId ~= nil then
             HideObstacle({ Id = ScreenAnchors.ShrinePointIconId, Duration = 0.2, IncludeText = true, })
         end
@@ -134,7 +133,7 @@ end, HudControl)
 -- Available Rerolls
 -- Scripts/UIScripts.lua : 684
 ModUtil.WrapBaseFunction("ShowRerollUI", function ( baseFunc, offsetY )
-    if config.Enabled and config.RemoveRerolls then
+    if HudControl.config.Enabled and HudControl.config.RemoveRerolls then
         return
     end
 
