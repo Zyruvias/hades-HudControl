@@ -33,6 +33,9 @@ HudControl.config = {
 
     -- Information
     RemoveHeat = true,
+    RemoveTightDeadline = true,
+    RemoveBoonAdditionPresentation = true,
+    RemoveChamberNumber = true,
 }
 
 -- Define mapping of Resource names to config options
@@ -150,4 +153,42 @@ ModUtil.WrapBaseFunction("ShowResourceUI", function ( baseFunc, resourceName, of
     end
 
     baseFunc( resourceName, offsetY, args )
+end, HudControl)
+
+-- Information - RemoveTightDeadline
+ModUtil.WrapBaseFunction("StartNewRun", function (baseFunc, ...)
+    local retVal = baseFunc(...)
+    if HudControl.config.Enabled and HudControl.config.RemoveTightDeadline then
+        CurrentRun.ActiveBiomeTimer = false
+    end
+    return retVal
+end, HudControl)
+
+-- Information - RemoveBoonAdditionPresentation
+ModUtil.WrapBaseFunction("AddTraitData", function (baseFunc, unit, TraitData, args)
+    if HudControl.config.Enabled and HudControl.config.RemoveBoonAdditionPresentation then
+        args = args or {}
+        args.SkipUIUpdate = true
+
+        -- called to prevent some crashing when opening the boon info screen in courtyard
+        -- UpdateHeroTraitDictionary()
+    end
+
+    baseFunc(unit, TraitData, args)
+end, HudControl)
+ModUtil.WrapBaseFunction("ShowAdvancedTooltipScreen", function (baseFunc, ...)
+    if HudControl.config.Enabled and HudControl.config.RemoveBoonAdditionPresentation then
+        return
+    end
+
+    baseFunc(...)
+end, HudControl)
+
+-- Information - RemoveChamberNumber
+ModUtil.WrapBaseFunction("ShowDepthCounter", function (baseFunc)
+    if HudControl.config.Enabled and HudControl.config.RemoveChamberNumber then
+        return
+    end
+
+    baseFunc()
 end, HudControl)
